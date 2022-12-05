@@ -14,7 +14,7 @@ namespace Online_Courses.Models
 
         public int PredmetLessonId { get; set; }
 
-        public DateOnly StartLesson { get; set; }
+        public DateTime StartLesson { get; set; }
 
         public DateTime EndLesson { get; set; }
     }

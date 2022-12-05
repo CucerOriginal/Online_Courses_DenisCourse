@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.StudentListdataGridView = new System.Windows.Forms.DataGridView();
             this.Searchbutton = new System.Windows.Forms.Button();
             this.Refreshbutton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.SearchtextBox = new System.Windows.Forms.TextBox();
             this.ChangeDatabutton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StudentListdataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // StudentListdataGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(68, 143);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(691, 275);
-            this.dataGridView1.TabIndex = 0;
+            this.StudentListdataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.StudentListdataGridView.Location = new System.Drawing.Point(68, 143);
+            this.StudentListdataGridView.Name = "StudentListdataGridView";
+            this.StudentListdataGridView.RowHeadersWidth = 51;
+            this.StudentListdataGridView.RowTemplate.Height = 29;
+            this.StudentListdataGridView.Size = new System.Drawing.Size(691, 275);
+            this.StudentListdataGridView.TabIndex = 0;
             // 
             // Searchbutton
             // 
@@ -55,6 +55,7 @@
             this.Searchbutton.TabIndex = 1;
             this.Searchbutton.Text = "Найти";
             this.Searchbutton.UseVisualStyleBackColor = true;
+            this.Searchbutton.Click += new System.EventHandler(this.Searchbutton_Click);
             // 
             // Refreshbutton
             // 
@@ -64,13 +65,14 @@
             this.Refreshbutton.TabIndex = 2;
             this.Refreshbutton.Text = "Обновить";
             this.Refreshbutton.UseVisualStyleBackColor = true;
+            this.Refreshbutton.Click += new System.EventHandler(this.Refreshbutton_Click);
             // 
-            // textBox1
+            // SearchtextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(255, 71);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(310, 27);
-            this.textBox1.TabIndex = 3;
+            this.SearchtextBox.Location = new System.Drawing.Point(255, 71);
+            this.SearchtextBox.Name = "SearchtextBox";
+            this.SearchtextBox.Size = new System.Drawing.Size(310, 27);
+            this.SearchtextBox.TabIndex = 3;
             // 
             // ChangeDatabutton
             // 
@@ -80,6 +82,7 @@
             this.ChangeDatabutton.TabIndex = 4;
             this.ChangeDatabutton.Text = "Изменить";
             this.ChangeDatabutton.UseVisualStyleBackColor = true;
+            this.ChangeDatabutton.Click += new System.EventHandler(this.ChangeDatabutton_Click);
             // 
             // button1
             // 
@@ -89,21 +92,23 @@
             this.button1.TabIndex = 5;
             this.button1.Text = "Показать всех учащихся ";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // StudentListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 533);
+            this.ClientSize = new System.Drawing.Size(823, 535);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ChangeDatabutton);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.SearchtextBox);
             this.Controls.Add(this.Refreshbutton);
             this.Controls.Add(this.Searchbutton);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.StudentListdataGridView);
             this.Name = "StudentListForm";
             this.Text = "StudentListForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.StudentListForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.StudentListdataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -111,10 +116,10 @@
 
         #endregion
 
-        private DataGridView dataGridView1;
+        private DataGridView StudentListdataGridView;
         private Button Searchbutton;
         private Button Refreshbutton;
-        private TextBox textBox1;
+        private TextBox SearchtextBox;
         private Button ChangeDatabutton;
         private Button button1;
     }

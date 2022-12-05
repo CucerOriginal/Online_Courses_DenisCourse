@@ -20,6 +20,6 @@ namespace Online_Courses.Models
 
         public string? PhoneNumber { get; set; }
 
-        public string? Addres { get; set; }
+        public string? Address { get; set; }
     }
 }

@@ -16,5 +16,23 @@ namespace Online_Courses.Forms
         {
             InitializeComponent();
         }
+
+        private void Mainbutton_Click(object sender, EventArgs e)
+        {
+            CoursesListForm coursesListForm = new CoursesListForm("Host=localhost;Port=5432;Database=OnlineCourse;Username=postgres;Password=q1w2e3");
+            coursesListForm.ShowDialog();
+        }
+
+        private void FilialOnebutton_Click(object sender, EventArgs e)
+        {
+            CoursesListForm coursesListForm = new CoursesListForm("Host=localhost;Port=5432;Database=OnlineCourseFilialOne;Username=postgres;Password=q1w2e3");
+            coursesListForm.ShowDialog();
+        }
+
+        private void FilialTwobutton_Click(object sender, EventArgs e)
+        {
+            CoursesListForm coursesListForm = new CoursesListForm("Host=localhost;Port=5432;Database=OnlineCourseFilialTwo;Username=postgres;Password=q1w2e3");
+            coursesListForm.ShowDialog();
+        }
     }
 }

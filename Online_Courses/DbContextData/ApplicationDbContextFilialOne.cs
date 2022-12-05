@@ -8,16 +8,15 @@ using System.Threading.Tasks;
 
 namespace Online_Courses.DbContextData
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContextFilialOne : DbContext
     {
-        string connectionString;
-        public ApplicationDbContext(string connection)
+        public ApplicationDbContextFilialOne()
         {
-            connectionString = connection;
+            Database.EnsureCreated();
         }
 
         public DbSet<CoursesList>? CoursesLists { get; set; }
-        
+
         public DbSet<PredmetLesson>? PredmetLessons { get; set; }
 
         public DbSet<Raspisanie>? Raspisanie { get; set; }
@@ -30,7 +29,7 @@ namespace Online_Courses.DbContextData
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(connectionString);
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=OnlineCourseFilialOne;Username=postgres;Password=q1w2e3");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -50,9 +49,9 @@ namespace Online_Courses.DbContextData
                 new Raspisanie { Id = 3, StartLesson = new DateTime(2022, 11, 24, 11, 0, 0, DateTimeKind.Utc), EndLesson = new DateTime(2022, 11, 24, 12, 0, 0, DateTimeKind.Utc), PredmetLessonId = 3, StudentGroupId = 3 });
 
             modelBuilder.Entity<Student>().HasData(
-                new Student { Id = 1, SecondName = "Куликов", FirstName = "Николай", MiddleName = "Алиевич", Address = "г.Казань, Домодедовская, 58", PhoneNumber = "89550367416", Birthday = new DateOnly(2000, 01, 21), CoursesListId = 1, StudentGroupId = 1 },
-                new Student { Id = 2, SecondName = "Кузнецов", FirstName = "Николай", MiddleName = "Марсельевич", Address = "г.Казань, Ленина, 53", PhoneNumber = "89303347156", Birthday = new DateOnly(1999, 10, 23), CoursesListId = 2, StudentGroupId = 2 },
-                new Student { Id = 3, SecondName = "Петров", FirstName = "Ярослав", MiddleName = "Львович", Address = "г.Казань, Ленина, 23", PhoneNumber = "89303767156", Birthday = new DateOnly(1996, 11, 11), CoursesListId = 3, StudentGroupId = 2 });
+                new Student { Id = 1, SecondName = "Куликов2", FirstName = "Николай", MiddleName = "Алиевич", Address = "г.Казань, Домодедовская, 58", PhoneNumber = "89550367416", Birthday = new DateOnly(2000, 01, 21), CoursesListId = 1, StudentGroupId = 1 },
+                new Student { Id = 2, SecondName = "Кузнецов2", FirstName = "Николай", MiddleName = "Марсельевич", Address = "г.Казань, Ленина, 53", PhoneNumber = "89303347156", Birthday = new DateOnly(1999, 10, 23), CoursesListId = 2, StudentGroupId = 2 },
+                new Student { Id = 3, SecondName = "Петров2", FirstName = "Ярослав", MiddleName = "Львович", Address = "г.Казань, Ленина, 23", PhoneNumber = "89303767156", Birthday = new DateOnly(1996, 11, 11), CoursesListId = 3, StudentGroupId = 2 });
 
             modelBuilder.Entity<StudentGroup>().HasData(
                 new StudentGroup { Id = 1, GroupNumber = "В-121", },

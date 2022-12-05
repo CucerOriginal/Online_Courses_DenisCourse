@@ -10,7 +10,7 @@ namespace Online_Courses.Models
     {
         public int Id { get; set; }
 
-        public string? GroupName { get; set; }
+        public string? GroupNumber { get; set; }
 
         public IList<Student>? Students { get; set; }
     }

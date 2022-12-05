@@ -41,6 +41,7 @@
             this.Mainbutton.TabIndex = 0;
             this.Mainbutton.Text = "Главный офис";
             this.Mainbutton.UseVisualStyleBackColor = true;
+            this.Mainbutton.Click += new System.EventHandler(this.Mainbutton_Click);
             // 
             // FilialOnebutton
             // 
@@ -50,6 +51,7 @@
             this.FilialOnebutton.TabIndex = 1;
             this.FilialOnebutton.Text = "Филиал первый";
             this.FilialOnebutton.UseVisualStyleBackColor = true;
+            this.FilialOnebutton.Click += new System.EventHandler(this.FilialOnebutton_Click);
             // 
             // FilialTwobutton
             // 
@@ -59,6 +61,7 @@
             this.FilialTwobutton.TabIndex = 2;
             this.FilialTwobutton.Text = "Филиал второй";
             this.FilialTwobutton.UseVisualStyleBackColor = true;
+            this.FilialTwobutton.Click += new System.EventHandler(this.FilialTwobutton_Click);
             // 
             // ChoiceOffice
             // 

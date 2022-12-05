@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.RaspisaniedataGridView = new System.Windows.Forms.DataGridView();
             this.SearchtextBox = new System.Windows.Forms.TextBox();
             this.Refreshbutton = new System.Windows.Forms.Button();
             this.Searchbutton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RaspisaniedataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // RaspisaniedataGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(102, 128);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(584, 286);
-            this.dataGridView1.TabIndex = 0;
+            this.RaspisaniedataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.RaspisaniedataGridView.Location = new System.Drawing.Point(102, 128);
+            this.RaspisaniedataGridView.Name = "RaspisaniedataGridView";
+            this.RaspisaniedataGridView.RowHeadersWidth = 51;
+            this.RaspisaniedataGridView.RowTemplate.Height = 29;
+            this.RaspisaniedataGridView.Size = new System.Drawing.Size(584, 286);
+            this.RaspisaniedataGridView.TabIndex = 0;
             // 
             // SearchtextBox
             // 
@@ -60,6 +60,7 @@
             this.Refreshbutton.TabIndex = 2;
             this.Refreshbutton.Text = "Обновить";
             this.Refreshbutton.UseVisualStyleBackColor = true;
+            this.Refreshbutton.Click += new System.EventHandler(this.Refreshbutton_Click);
             // 
             // Searchbutton
             // 
@@ -69,6 +70,7 @@
             this.Searchbutton.TabIndex = 3;
             this.Searchbutton.Text = "Поиск";
             this.Searchbutton.UseVisualStyleBackColor = true;
+            this.Searchbutton.Click += new System.EventHandler(this.Searchbutton_Click);
             // 
             // RaspisanieListForm
             // 
@@ -78,10 +80,11 @@
             this.Controls.Add(this.Searchbutton);
             this.Controls.Add(this.Refreshbutton);
             this.Controls.Add(this.SearchtextBox);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.RaspisaniedataGridView);
             this.Name = "RaspisanieListForm";
             this.Text = "RaspisanieListForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.RaspisanieListForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.RaspisaniedataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -89,7 +92,7 @@
 
         #endregion
 
-        private DataGridView dataGridView1;
+        private DataGridView RaspisaniedataGridView;
         private TextBox SearchtextBox;
         private Button Refreshbutton;
         private Button Searchbutton;
