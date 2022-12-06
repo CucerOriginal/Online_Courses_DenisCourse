@@ -14,6 +14,7 @@ namespace Online_Courses.Forms
     public partial class StudentListForm : Form
     {
         string connectionString;
+        int selectedStudentId;
         ApplicationDbContext dbContext;
 
         ApplicationDbContextFilialOne dbContextFilialOne = new ApplicationDbContextFilialOne();
@@ -32,16 +33,9 @@ namespace Online_Courses.Forms
 
             var students = dbContext.Students.ToList();
             StudentListdataGridView.DataSource = students;
-            StudentListdataGridView.Columns.Add("GroupNumber", "GroupNumber");
-            for (int i = 0; i < students.Count; i++)
-            {
-                var group = dbContext.StudentGroups.FirstOrDefault(g => g.Id == students[i].StudentGroupId);
-                StudentListdataGridView.Rows[i].Cells["GroupNumber"].Value = group.GroupNumber;
-            }
             StudentListdataGridView.Columns[0].Visible = false;
             StudentListdataGridView.Columns[7].Visible = false;
             StudentListdataGridView.Columns[8].Visible = false;
-            StudentListdataGridView.Columns[9].ReadOnly = true;
 
             if (connectionString == "Host=localhost;Port=5432;Database=OnlineCourse;Username=postgres;Password=q1w2e3")
             {
@@ -57,11 +51,6 @@ namespace Online_Courses.Forms
         {
             var students = dbContext.Students.ToList();
             StudentListdataGridView.DataSource = students;
-            for (int i = 0; i < students.Count; i++)
-            {
-                var group = dbContext.StudentGroups.FirstOrDefault(g => g.Id == students[i].StudentGroupId);
-                StudentListdataGridView.Rows[i].Cells["GroupNumber"].Value = group.GroupNumber;
-            }
         }
 
         private void Searchbutton_Click(object sender, EventArgs e)
@@ -69,11 +58,6 @@ namespace Online_Courses.Forms
             var students = dbContext.Students.Where(p=> p.SecondName == SearchtextBox.Text || p.FirstName == SearchtextBox.Text || p.MiddleName == SearchtextBox.Text
             || p.Address == SearchtextBox.Text || p.PhoneNumber == SearchtextBox.Text).ToList();
             StudentListdataGridView.DataSource = students;
-            for (int i = 0; i < students.Count; i++)
-            {
-                var group = dbContext.StudentGroups.FirstOrDefault(g => g.Id == students[i].StudentGroupId);
-                StudentListdataGridView.Rows[i].Cells["GroupNumber"].Value = group.GroupNumber;
-            }
         }
 
         private void ChangeDatabutton_Click(object sender, EventArgs e)
@@ -91,10 +75,30 @@ namespace Online_Courses.Forms
 
             StudentListdataGridView.DataSource=students;
 
-            for (int i = 0; i < students.Count; i++)
+        }
+
+        private void AddGroupbutton_Click(object sender, EventArgs e)
+        {
+            if (selectedStudentId != 0)
             {
-                var group = dbContext.StudentGroups.FirstOrDefault(g => g.Id == students[i].StudentGroupId);
-                StudentListdataGridView.Rows[i].Cells["GroupNumber"].Value = group.GroupNumber;
+                AddAnotherGroup addAnotherGroup = new AddAnotherGroup(connectionString, selectedStudentId);
+                addAnotherGroup.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Выберите ученика");
+            }
+        }
+
+        private void StudentListdataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                selectedStudentId = (int)StudentListdataGridView.Rows[e.RowIndex].Cells[0].Value;
+            }
+            catch
+            {
+
             }
         }
     }

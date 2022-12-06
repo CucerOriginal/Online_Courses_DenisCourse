@@ -21,9 +21,11 @@ namespace Online_Courses.DbContextData
 
         public DbSet<Raspisanie>? Raspisanie { get; set; }
 
+        public DbSet<GroupStudentConnection>? GroupStudentConnections { get; set; }
+
         public DbSet<Student>? Students { get; set; }
 
-        public DbSet<StudentGroup>? StudentGroups { get; set; }
+        public DbSet<Group>? StudentGroups { get; set; }
 
         public DbSet<Teacher>? Teachers { get; set; }
 
@@ -49,14 +51,19 @@ namespace Online_Courses.DbContextData
                 new Raspisanie { Id = 3, StartLesson = new DateTime(2022, 11, 24, 11, 0, 0, DateTimeKind.Utc), EndLesson = new DateTime(2022, 11, 24, 12, 0, 0, DateTimeKind.Utc), PredmetLessonId = 3, StudentGroupId = 3 });
 
             modelBuilder.Entity<Student>().HasData(
-                new Student { Id = 1, SecondName = "Куликов3", FirstName = "Николай", MiddleName = "Алиевич", Address = "г.Казань, Домодедовская, 58", PhoneNumber = "89550367416", Birthday = new DateOnly(2000, 01, 21), CoursesListId = 1, StudentGroupId = 1 },
-                new Student { Id = 2, SecondName = "Кузнецов3", FirstName = "Николай", MiddleName = "Марсельевич", Address = "г.Казань, Ленина, 53", PhoneNumber = "89303347156", Birthday = new DateOnly(1999, 10, 23), CoursesListId = 2, StudentGroupId = 2 },
-                new Student { Id = 3, SecondName = "Петров3", FirstName = "Ярослав", MiddleName = "Львович", Address = "г.Казань, Ленина, 23", PhoneNumber = "89303767156", Birthday = new DateOnly(1996, 11, 11), CoursesListId = 3, StudentGroupId = 2 });
+                new Student { Id = 1, SecondName = "Куликов3", FirstName = "Николай", MiddleName = "Алиевич", Address = "г.Казань, Домодедовская, 58", PhoneNumber = "89550367416", Birthday = new DateOnly(2000, 01, 21), CoursesListId = 1,  },
+                new Student { Id = 2, SecondName = "Кузнецов3", FirstName = "Николай", MiddleName = "Марсельевич", Address = "г.Казань, Ленина, 53", PhoneNumber = "89303347156", Birthday = new DateOnly(1999, 10, 23), CoursesListId = 2, },
+                new Student { Id = 3, SecondName = "Петров3", FirstName = "Ярослав", MiddleName = "Львович", Address = "г.Казань, Ленина, 23", PhoneNumber = "89303767156", Birthday = new DateOnly(1996, 11, 11), CoursesListId = 3,  });
 
-            modelBuilder.Entity<StudentGroup>().HasData(
-                new StudentGroup { Id = 1, GroupNumber = "В-121", },
-                new StudentGroup { Id = 2, GroupNumber = "Ф-011" },
-                new StudentGroup { Id = 3, GroupNumber = "Г-111" });
+            modelBuilder.Entity<GroupStudentConnection>().HasData(
+              new GroupStudentConnection { Id = 1, GroupId = 1, StudentId = 1 },
+              new GroupStudentConnection { Id = 2, GroupId = 2, StudentId = 2 },
+              new GroupStudentConnection { Id = 3, GroupId = 3, StudentId = 3 });
+
+            modelBuilder.Entity<Group>().HasData(
+                new Group { Id = 1, GroupNumber = "В-121", },
+                new Group { Id = 2, GroupNumber = "Ф-011" },
+                new Group { Id = 3, GroupNumber = "Г-111" });
 
             modelBuilder.Entity<Teacher>().HasData(
                 new Teacher { Id = 1, SecondName = "Семенова", FirstName = "Таисия", MiddleName = "Артёмовна", PhoneNumber = "89270382406", Address = "г.Казань, Домодедовская, 58", Birthday = new DateOnly(1994, 02, 21) },

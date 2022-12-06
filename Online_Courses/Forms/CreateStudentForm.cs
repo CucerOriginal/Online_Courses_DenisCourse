@@ -27,9 +27,18 @@ namespace Online_Courses.Forms
         private void CreateStudentButton_Click(object sender, EventArgs e)
         {
             Student student = new Student { SecondName = SecondNametextBox.Text, FirstName = NametextBox.Text, MiddleName = MiddleNametextBox.Text, Address = AddrestextBox.Text, 
-                Birthday = DateOnly.FromDateTime(BirthdaydateTimePicker.Value), PhoneNumber = PhoneNumertextBox.Text, CoursesListId = courseId, StudentGroupId = GroupscomboBox.SelectedIndex + 1};
+                Birthday = DateOnly.FromDateTime(BirthdaydateTimePicker.Value), PhoneNumber = PhoneNumertextBox.Text, CoursesListId = courseId};
+
 
             dbContext.Students.Add(student);
+
+            dbContext.SaveChanges();
+
+            var lastStudent = dbContext.Students.ToList().Last().Id;
+
+            GroupStudentConnection studentGroupConnection = new GroupStudentConnection { GroupId = GroupscomboBox.SelectedIndex + 1, StudentId = lastStudent};
+
+            dbContext.GroupStudentConnections.Add(studentGroupConnection);
 
             dbContext.SaveChanges();
 

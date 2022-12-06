@@ -22,7 +22,7 @@ namespace Online_Courses.Models
 
         public string? Address { get; set; }
 
-        public int? StudentGroupId { get; set; }
+        public IList<GroupStudentConnection>? GroupStudents { get; set; }
 
         public int CoursesListId { get; set; }
     }

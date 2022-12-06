@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Online_Courses.Models
 {
-    public class StudentGroup
+    public class GroupStudentConnection
     {
         public int Id { get; set; }
 
-        public string? GroupNumber { get; set; }
+        public int StudentId { get; set; }
 
-        public IList<Student>? Students { get; set; }
+        public int GroupId { get; set; }
     }
 }

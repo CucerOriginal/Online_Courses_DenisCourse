@@ -34,6 +34,7 @@
             this.SearchtextBox = new System.Windows.Forms.TextBox();
             this.ChangeDatabutton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.AddGroupbutton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.StudentListdataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,6 +47,7 @@
             this.StudentListdataGridView.RowTemplate.Height = 29;
             this.StudentListdataGridView.Size = new System.Drawing.Size(691, 275);
             this.StudentListdataGridView.TabIndex = 0;
+            this.StudentListdataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.StudentListdataGridView_CellClick);
             // 
             // Searchbutton
             // 
@@ -94,11 +96,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // AddGroupbutton
+            // 
+            this.AddGroupbutton.Location = new System.Drawing.Point(560, 455);
+            this.AddGroupbutton.Name = "AddGroupbutton";
+            this.AddGroupbutton.Size = new System.Drawing.Size(166, 29);
+            this.AddGroupbutton.TabIndex = 6;
+            this.AddGroupbutton.Text = "Записать на курс";
+            this.AddGroupbutton.UseVisualStyleBackColor = true;
+            this.AddGroupbutton.Click += new System.EventHandler(this.AddGroupbutton_Click);
+            // 
             // StudentListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 535);
+            this.Controls.Add(this.AddGroupbutton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ChangeDatabutton);
             this.Controls.Add(this.SearchtextBox);
@@ -122,5 +135,6 @@
         private TextBox SearchtextBox;
         private Button ChangeDatabutton;
         private Button button1;
+        private Button AddGroupbutton;
     }
 }

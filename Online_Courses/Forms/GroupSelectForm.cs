@@ -15,10 +15,12 @@ namespace Online_Courses.Forms
     {
         string connectionString;
         int studentId;
+        int groupId;
         int selectedGroupId;
         ApplicationDbContext dbContext;
-        public GroupSelectForm(string connection, int id)
+        public GroupSelectForm(string connection, int id, int conId)
         {
+            groupId = conId;
             connectionString = connection;
             studentId = id;
             InitializeComponent();
@@ -41,8 +43,8 @@ namespace Online_Courses.Forms
         {
             if (selectedGroupId != 0)
             {
-                var student = dbContext.Students.FirstOrDefault(p => p.Id == studentId);
-                student.StudentGroupId = selectedGroupId;
+                var studentGroupConn = dbContext.GroupStudentConnections.FirstOrDefault(p => p.StudentId == studentId && p.GroupId == groupId);
+                studentGroupConn.GroupId = selectedGroupId;
                 dbContext.SaveChanges();
 
                 this.Close();

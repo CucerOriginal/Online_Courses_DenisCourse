@@ -14,7 +14,8 @@ namespace Online_Courses.Forms
     public partial class GroupList : Form
     {
         string connectionString;
-        int selectedGroup;
+        int selectedGroupId;
+        int selectedGroupStudentConId;
         int selectedStudentId;
         ApplicationDbContext dbContext;
 
@@ -32,56 +33,41 @@ namespace Online_Courses.Forms
             GroupListdataGridView.Columns[0].Visible = false;
             GroupListdataGridView.Columns[1].ReadOnly = true;
             GroupListdataGridView.Columns[2].Visible = false;
-            var students = dbContext.Students.ToArray();
-            StudentListdataGridView.DataSource = students;
-            StudentListdataGridView.Columns.Add("GroupNumber", "GroupNumber");
-            for (int i = 0; i < students.Length; i++)
-            {
-                var group = dbContext.StudentGroups.FirstOrDefault(g => g.Id == students[i].StudentGroupId);
-                StudentListdataGridView.Rows[i].Cells["GroupNumber"].Value = group.GroupNumber;
-            }
+           
+            var student = dbContext.Students.Join(dbContext.GroupStudentConnections, a => a.Id, b => b.StudentId, (a, b) => new { a.Id, a.SecondName, a.FirstName, a.MiddleName, a.PhoneNumber, a.Birthday, a.Address, b.StudentId, b.GroupId }).Join(dbContext.StudentGroups,
+                    p => p.GroupId, o => o.Id, (p, o) => new { p.Id, p.SecondName, p.FirstName, p.MiddleName, p.PhoneNumber, p.Birthday, p.Address, o.GroupNumber , p.GroupId}).ToArray();
+            StudentListdataGridView.DataSource = student;
             StudentListdataGridView.Columns[0].Visible = false;
-            StudentListdataGridView.Columns[7].Visible = false;
             StudentListdataGridView.Columns[8].Visible = false;
         }
 
         private void GroupListdataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            selectedGroup = (int)GroupListdataGridView.Rows[e.RowIndex].Cells[0].Value;
-            var students = dbContext.Students.Where(p=> p.StudentGroupId == selectedGroup).ToArray();
-            StudentListdataGridView.DataSource = students;
-            for (int i = 0; i < students.Length; i++)
-            {
-                var group = dbContext.StudentGroups.FirstOrDefault(g => g.Id == students[i].StudentGroupId);
-                StudentListdataGridView.Rows[i].Cells["GroupNumber"].Value = group.GroupNumber;
-            }
+            selectedGroupId = (int)GroupListdataGridView.Rows[e.RowIndex].Cells[0].Value;
+
+            var student = dbContext.Students.Join(dbContext.GroupStudentConnections, a => a.Id, b => b.StudentId, (a, b) => new { a.Id, a.SecondName, a.FirstName, a.MiddleName, a.PhoneNumber, a.Birthday, a.Address, b.StudentId, b.GroupId }).Join(dbContext.StudentGroups,
+                    p => p.GroupId, o => o.Id, (p, o) => new { p.Id, p.SecondName, p.FirstName, p.MiddleName, p.PhoneNumber, p.Birthday, p.Address, o.GroupNumber, p.GroupId }).Where(p=> p.GroupId == selectedGroupId).ToArray();
+            StudentListdataGridView.DataSource = student;
         }
 
         private void Searchbutton_Click(object sender, EventArgs e)
         {
-            if (selectedGroup != 0)
+            if (selectedGroupId == 0)
             {
-                var students = dbContext.Students.Where(p => p.SecondName == SearchtextBox.Text || p.FirstName == SearchtextBox.Text || p.MiddleName == SearchtextBox.Text
-                || p.Address == SearchtextBox.Text || p.PhoneNumber == SearchtextBox.Text).ToList();
-                students = students.Where(p => p.StudentGroupId == selectedGroup).ToList();
-                StudentListdataGridView.DataSource = students;
-                for (int i = 0; i < students.Count; i++)
-                {
-                    var group = dbContext.StudentGroups.FirstOrDefault(g => g.Id == students[i].StudentGroupId);
-                    StudentListdataGridView.Rows[i].Cells["GroupNumber"].Value = group.GroupNumber;
-                }
+                var students = dbContext.Students.Join(dbContext.GroupStudentConnections, a => a.Id, b => b.StudentId, (a, b) => new { a.Id, a.SecondName, a.FirstName, a.MiddleName, a.PhoneNumber, a.Birthday, a.Address, b.StudentId, b.GroupId }).Join(dbContext.StudentGroups,
+                    p => p.GroupId, o => o.Id, (p, o) => new { p.Id, p.SecondName, p.FirstName, p.MiddleName, p.PhoneNumber, p.Birthday, p.Address, o.GroupNumber, p.GroupId }).ToArray();
+                var studentsSearch = students.Where(p => p.SecondName == SearchtextBox.Text || p.FirstName == SearchtextBox.Text || p.MiddleName == SearchtextBox.Text
+                || p.Address == SearchtextBox.Text || p.PhoneNumber == SearchtextBox.Text || p.GroupNumber == SearchtextBox.Text).ToList();
+                StudentListdataGridView.DataSource = studentsSearch;
             }
             else
             {
-
-                var students = dbContext.Students.Where(p => p.SecondName == SearchtextBox.Text || p.FirstName == SearchtextBox.Text || p.MiddleName == SearchtextBox.Text
-                || p.Address == SearchtextBox.Text || p.PhoneNumber == SearchtextBox.Text).ToList();
-                StudentListdataGridView.DataSource = students;
-                for (int i = 0; i < students.Count; i++)
-                {
-                    var group = dbContext.StudentGroups.FirstOrDefault(g => g.Id == students[i].StudentGroupId);
-                    StudentListdataGridView.Rows[i].Cells["GroupNumber"].Value = group.GroupNumber;
-                }
+                var students = dbContext.Students.Join(dbContext.GroupStudentConnections, a => a.Id, b => b.StudentId, (a, b) => new { a.Id, a.SecondName, a.FirstName, a.MiddleName, a.PhoneNumber, a.Birthday, a.Address, b.StudentId, b.GroupId }).Join(dbContext.StudentGroups,
+                                    p => p.GroupId, o => o.Id, (p, o) => new { p.Id, p.SecondName, p.FirstName, p.MiddleName, p.PhoneNumber, p.Birthday, p.Address, o.GroupNumber, p.GroupId }).ToArray();
+                var studentsSearch = students.Where(p => p.SecondName == SearchtextBox.Text || p.FirstName == SearchtextBox.Text || p.MiddleName == SearchtextBox.Text
+                || p.Address == SearchtextBox.Text || p.PhoneNumber == SearchtextBox.Text || p.GroupNumber == SearchtextBox.Text);
+                studentsSearch = studentsSearch.Where(p => p.GroupId == selectedGroupId).ToArray();
+                StudentListdataGridView.DataSource = studentsSearch;
             }
         }
 
@@ -90,6 +76,7 @@ namespace Online_Courses.Forms
             try
             {
                 selectedStudentId = (int)StudentListdataGridView.Rows[e.RowIndex].Cells[0].Value;
+                selectedGroupStudentConId = (int)StudentListdataGridView.Rows[e.RowIndex].Cells[8].Value;
             }
             catch
             {
@@ -101,7 +88,7 @@ namespace Online_Courses.Forms
         {
             if (selectedStudentId != 0)
             {
-                GroupSelectForm groupSelectForm = new GroupSelectForm(connectionString, selectedStudentId);
+                GroupSelectForm groupSelectForm = new GroupSelectForm(connectionString, selectedStudentId, selectedGroupStudentConId);
                 groupSelectForm.ShowDialog();
             }
             else
@@ -112,15 +99,10 @@ namespace Online_Courses.Forms
 
         private void Refreshbutton_Click(object sender, EventArgs e)
         {
-            dbContext = new ApplicationDbContext(connectionString);
-            GroupListdataGridView.DataSource = dbContext.StudentGroups.ToArray();
-            var students = dbContext.Students.ToArray();
-            StudentListdataGridView.DataSource = students;
-            for (int i = 0; i < students.Length; i++)
-            {
-                var group = dbContext.StudentGroups.FirstOrDefault(g => g.Id == students[i].StudentGroupId);
-                StudentListdataGridView.Rows[i].Cells["GroupNumber"].Value = group.GroupNumber;
-            }
+            var student = dbContext.Students.Join(dbContext.GroupStudentConnections, a => a.Id, b => b.StudentId, (a, b) => new { a.Id, a.SecondName, a.FirstName, a.MiddleName, a.PhoneNumber, a.Birthday, a.Address, b.StudentId, b.GroupId }).Join(dbContext.StudentGroups,
+                    p => p.GroupId, o => o.Id, (p, o) => new { p.Id, p.SecondName, p.FirstName, p.MiddleName, p.PhoneNumber, p.Birthday, p.Address, o.GroupNumber, p.GroupId }).ToArray();
+            StudentListdataGridView.DataSource = student;
+            selectedGroupId = 0;
         }
     }
 }
